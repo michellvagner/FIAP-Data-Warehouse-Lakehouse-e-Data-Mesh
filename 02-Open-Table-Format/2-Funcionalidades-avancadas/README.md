@@ -16,6 +16,9 @@ Observe que o Amazon Athena fornece suporte integrado para o Apache Iceberg, per
 
 Ao final deste laboratório, você terá criado uma tabela particionada, aplicado alterações condicionais com `MERGE` e executado manutenção com `OPTIMIZE`.
 
+> [!TIP]
+> Sempre que encontrar um bloco com o título **💡 Clique para entender**, abra esse trecho. Ele destaca a lógica do comando, o comportamento esperado no Athena e o motivo técnico da etapa.
+
 > [!IMPORTANT]
 > Este laboratório pressupõe que o banco `athena_iceberg_db` já exista e que o ambiente TPC-DS já tenha sido preparado no Athena.
 
@@ -53,7 +56,7 @@ TBLPROPERTIES (
 A consulta deve terminar com **Consulta bem-sucedida**.
 
 <details>
-<summary><b>Explicação do particionamento oculto no Iceberg</b></summary>
+<summary><b>💡 Clique para entender: particionamento oculto no Iceberg</b></summary>
 <blockquote>
 
 Esse ponto é um dos grandes diferenciais do Iceberg em relação a abordagens mais antigas de data lake.
@@ -147,7 +150,7 @@ WHERE ws_sales_time >= TIMESTAMP '2000-01-01 00:00:00' AND ws_sales_time < TIMES
 ![Hidden-analyze](img/query_hidden_partition_analyze.png)
 
 <details>
-<summary><b>Explicação do EXPLAIN ANALYZE neste contexto</b></summary>
+<summary><b>💡 Clique para entender: EXPLAIN ANALYZE neste contexto</b></summary>
 <blockquote>
 
 Aqui o objetivo é confirmar, com evidência, se o Athena está lendo apenas a parte necessária da tabela particionada.
@@ -283,7 +286,7 @@ WHEN NOT MATCHED THEN INSERT (ws_order_number, ws_item_sk, ws_quantity, ws_sales
 ```
 
 <details>
-<summary><b>Explicação do comando MERGE INTO</b></summary>
+<summary><b>💡 Clique para entender: comando MERGE INTO</b></summary>
 <blockquote>
 
 O `MERGE INTO` é um comando muito importante em arquitetura analítica moderna porque concentra atualização, inserção e exclusão em uma única instrução transacional.
@@ -400,7 +403,7 @@ OPTIMIZE athena_iceberg_db.web_sales_iceberg REWRITE DATA USING BIN_PACK;
 A consulta deve terminar com **Consulta bem-sucedida**.
 
 <details>
-<summary><b>Explicação do comando OPTIMIZE</b></summary>
+<summary><b>💡 Clique para entender: comando OPTIMIZE</b></summary>
 <blockquote>
 
 `OPTIMIZE` é um comando de manutenção física da tabela. Ele não muda a lógica do dado de negócio, mas melhora a forma como os arquivos ficam organizados para leitura posterior.

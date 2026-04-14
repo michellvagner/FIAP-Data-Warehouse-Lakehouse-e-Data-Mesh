@@ -16,6 +16,9 @@ Observe que o Amazon Athena fornece suporte integrado para o Apache Iceberg, per
 
 Você consultará as tabelas `web_sales_iceberg` e `customer_iceberg` que foram criadas em laboratórios anteriores de Glue, EMR ou Athena.
 
+> [!TIP]
+> Sempre que encontrar um bloco com o título **💡 Clique para entender**, abra esse trecho. Ele foi pensado para ajudar o aluno a interpretar o comando e conectar a prática ao conceito.
+
 > [!IMPORTANT]
 > Esta parte depende diretamente dos laboratórios anteriores. Se as tabelas ainda não existirem, volte e conclua os exercícios anteriores antes de continuar.
 
@@ -69,7 +72,7 @@ FROM customer_iceberg
 As consultas seguem a [especificação de formato Iceberg v2](https://iceberg.apache.org/spec/#format-versioning). Caso a consulta seja executada sobre uma tabela que tenha usado `merge-on-read` — por exemplo, tabelas em `athena_iceberg_db` — os arquivos de exclusão por posição serão mesclados com os arquivos de dados no momento da leitura.
 
 <details>
-<summary><b>Explicação do consumo de tabelas Iceberg no Athena</b></summary>
+<summary><b>💡 Clique para entender: consumo de tabelas Iceberg no Athena</b></summary>
 <blockquote>
 
 O grande valor aqui é perceber que consumir uma tabela Iceberg é muito mais do que ler um conjunto de arquivos Parquet soltos no S3.
@@ -137,7 +140,7 @@ GROUP BY ws_warehouse_sk
 ```
 
 <details>
-<summary><b>Explicação dos comandos EXPLAIN e EXPLAIN ANALYZE</b></summary>
+<summary><b>💡 Clique para entender: EXPLAIN e EXPLAIN ANALYZE</b></summary>
 <blockquote>
 
 Esses comandos são fundamentais para sair do nível “a consulta funciona” e chegar ao nível “eu entendo como a engine está trabalhando”.
@@ -211,7 +214,7 @@ GROUP BY ws_warehouse_sk
 A execução deve terminar com **Consulta bem-sucedida**.
 
 <details>
-<summary><b>Explicação do comando CREATE VIEW</b></summary>
+<summary><b>💡 Clique para entender: comando CREATE VIEW</b></summary>
 <blockquote>
 
 Uma view cria uma camada lógica de consumo sobre a tabela original. Ela não copia os dados nem cria um novo conjunto físico de arquivos no S3.

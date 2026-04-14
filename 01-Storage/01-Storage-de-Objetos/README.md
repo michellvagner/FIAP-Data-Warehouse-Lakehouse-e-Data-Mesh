@@ -17,6 +17,9 @@ Neste laboratório, você vai:
 
 Ao final do exercício, você terá entendido como o comportamento do S3 muda conforme o tamanho do arquivo e conforme a estratégia de transferência usada.
 
+> [!TIP]
+> Sempre que encontrar um bloco com o título **💡 Clique para entender**, abra esse trecho. Ele traz uma explicação complementar do comando, do comportamento esperado e do contexto da aula.
+
 ---
 
 ## Contexto
@@ -84,7 +87,7 @@ aws s3 cp factbook.csv s3://$bucket/other/factbook.tst
 ```
 
 <details>
-<summary><b>Explicação dos comandos de cópia dos arquivos</b></summary>
+<summary><b>💡 Clique para entender: comandos de cópia dos arquivos</b></summary>
 <blockquote>
 
 O comando `aws s3 cp` é utilizado para copiar arquivos entre o sistema de arquivos local e buckets do Amazon S3, ou entre buckets S3.
@@ -132,7 +135,7 @@ aws configure set default.s3.multipart_chunksize 16MB
 ```
 
 <details>
-<summary><b>Explicação dos comandos de configuração da AWS CLI</b></summary>
+<summary><b>💡 Clique para entender: comandos de configuração da AWS CLI</b></summary>
 <blockquote>
 
 - `default.s3.max_concurrent_requests`: controla quantas solicitações podem acontecer em paralelo
@@ -229,7 +232,7 @@ time seq 1 5 | parallel --will-cite -j 5 aws s3 cp 1GB.file s3://${bucket}/paral
 ```
 
 <details>
-<summary><b>Explicação do upload com comando parallel</b></summary>
+<summary><b>💡 Clique para entender: upload com comando parallel</b></summary>
 <blockquote>
 
 Nesse comando:
@@ -274,7 +277,7 @@ time aws s3 sync sync/ s3://${bucket}/sync1/
 ```
 
 <details>
-<summary><b>Explicação do upload com comando sync</b></summary>
+<summary><b>💡 Clique para entender: upload com comando sync</b></summary>
 <blockquote>
 
 O comando `aws s3 sync` sincroniza conteúdo entre um diretório local e um bucket S3.
@@ -325,7 +328,7 @@ time parallel --will-cite -a object_ids -j 5 aws s3 cp 1KB.file s3://${bucket}/r
 ```
 
 <details>
-<summary><b>Explicação do upload com comando parallel</b></summary>
+<summary><b>💡 Clique para entender: upload com comando parallel</b></summary>
 <blockquote>
 
 Aqui o GNU Parallel lê os IDs do arquivo `object_ids` e substitui `{}` no caminho de destino, criando múltiplos objetos distintos no S3.
@@ -353,7 +356,7 @@ time aws s3 cp s3://$bucket/upload1.test s3://$bucket/copy/5GB-3.file
 ```
 
 <details>
-<summary><b>Explicação dos comandos de cópia de arquivos no S3</b></summary>
+<summary><b>💡 Clique para entender: comandos de cópia de arquivos no S3</b></summary>
 <blockquote>
 
 Você está comparando 3 abordagens:

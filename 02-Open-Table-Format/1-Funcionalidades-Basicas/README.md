@@ -19,6 +19,9 @@ Observe que o Amazon Athena fornece suporte integrado para o Apache Iceberg, per
 
 Ao final deste laboratório, você terá criado uma tabela Iceberg no Athena, carregado dados nela, executado operações de `INSERT`, `UPDATE`, `DELETE`, `FOR VERSION AS OF`, `FOR TIMESTAMP AS OF` e mudanças de esquema.
 
+> [!TIP]
+> Sempre que encontrar um bloco com o título **💡 Clique para entender**, abra esse trecho. Ele traz explicação detalhada do comando, contexto prático da aula e links oficiais para aprofundamento.
+
 ---
 
 ## Parte 1 - Pré-requisitos e criação do ambiente
@@ -38,7 +41,7 @@ cd /workspaces/fiap-cloud-based-analytics && bash setup_athena_tpcds.sh
 ```
 
 <details>
-<summary><b>Explicação do preparo automático do ambiente</b></summary>
+<summary><b>💡 Clique para entender: preparo automático do ambiente</b></summary>
 <blockquote>
 
 Esse comando executa um script shell que funciona como um orquestrador do laboratório. A ideia é eliminar tarefas repetitivas de preparação para que a aula fique concentrada no comportamento do Apache Iceberg dentro do Athena.
@@ -170,7 +173,7 @@ TBLPROPERTIES (
 ![](img/create-iceberg-table-2.png)
 
 <details>
-<summary><b>Explicação do comando de criação da tabela Iceberg</b></summary>
+<summary><b>💡 Clique para entender: criação da tabela Iceberg</b></summary>
 <blockquote>
 
 Esse é um dos comandos centrais do laboratório, porque ele define tanto a estrutura lógica da tabela quanto o comportamento transacional esperado no data lake.
@@ -278,7 +281,7 @@ SELECT * FROM "athena_iceberg_db"."customer_iceberg$snapshots"
 ```
 
 <details>
-<summary><b>Explicação das tabelas de metadados do Iceberg</b></summary>
+<summary><b>💡 Clique para entender: tabelas de metadados do Iceberg</b></summary>
 <blockquote>
 
 Essas consultas são extremamente valiosas porque mostram o que está por trás da tabela sem exigir inspeção manual dos arquivos no S3.
@@ -342,7 +345,7 @@ SELECT * FROM tpcds.prepared_customer
 A execução deve terminar com a mensagem **Consulta bem-sucedida**.
 
 <details>
-<summary><b>Explicação do carregamento com INSERT INTO ... SELECT</b></summary>
+<summary><b>💡 Clique para entender: carregamento com INSERT INTO ... SELECT</b></summary>
 <blockquote>
 
 Esse padrão de comando é um dos mais importantes em pipelines analíticos. Ele lê dados de uma origem já preparada e os grava em uma tabela de destino mantendo o formato e as propriedades do Iceberg.
@@ -488,7 +491,7 @@ WHERE c_customer_sk = 15
 A consulta deve terminar com **Consulta bem-sucedida**.
 
 <details>
-<summary><b>Explicação do comando UPDATE em tabela Iceberg</b></summary>
+<summary><b>💡 Clique para entender: UPDATE em tabela Iceberg</b></summary>
 <blockquote>
 
 Esse comando faz uma correção pontual de dado, algo muito comum em cenários reais de lakehouse quando há enriquecimento, ajuste cadastral ou retificação operacional.
@@ -590,7 +593,7 @@ O resultado esperado é **Nenhum resultado**.
 Athena também usa `merge-on-read` para `DELETE`, criando arquivos de exclusão baseados em posição em vez de reescrever todos os arquivos de dados.
 
 <details>
-<summary><b>Explicação do comando DELETE em tabela Iceberg</b></summary>
+<summary><b>💡 Clique para entender: DELETE em tabela Iceberg</b></summary>
 <blockquote>
 
 O `DELETE` remove o registro da visão atual da tabela, mas o aprendizado mais importante aqui é entender que, no Iceberg, exclusão não significa simplesmente apagar um arquivo inteiro do S3.
@@ -671,7 +674,7 @@ WHERE c_customer_sk = 15
 Novamente, o resultado deve mostrar o registro do cliente Tonya.
 
 <details>
-<summary><b>Explicação do time travel com snapshot e timestamp</b></summary>
+<summary><b>💡 Clique para entender: time travel com snapshot e timestamp</b></summary>
 <blockquote>
 
 Time travel é um dos recursos mais característicos do Iceberg. Ele permite consultar a tabela como ela estava em um momento anterior, sem restaurar backup e sem alterar o estado atual.
@@ -769,7 +772,7 @@ LIMIT 10
 A nova coluna deverá aparecer com valores `null` para os registros já existentes.
 
 <details>
-<summary><b>Explicação da evolução de esquema no Iceberg</b></summary>
+<summary><b>💡 Clique para entender: evolução de esquema no Iceberg</b></summary>
 <blockquote>
 
 Evolução de esquema é a capacidade de adaptar a estrutura da tabela ao longo do tempo sem quebrar todo o pipeline analítico. Em data platforms reais, isso acontece o tempo todo.
