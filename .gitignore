@@ -1,16 +1,186 @@
-*.tfstate*
-*.tfvars
-*.terraform/*
-.terraform/*
-.terraform/
-codigosTeste/*
-codigosTeste/
-*.DS_Store*
+# ==============================================================================
+# Sistemas operacionais
+# ==============================================================================
 
-Python
-build/
-develop-eggs/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==============================================================================
+# Editores / IDEs
+# ==============================================================================
+
+# VS Code
+.vscode/
+.vscode-test/
+*.code-workspace
+.history/
+
+# JetBrains (IntelliJ, PyCharm, WebStorm, etc)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+tags
+
+# Emacs
+\#*\#
+.\#*
+*~
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# ==============================================================================
+# Credenciais, segredos e arquivos sensíveis
+# ==============================================================================
+
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+secrets.yaml
+secrets.yml
+credentials
+credentials.json
+.aws/credentials
+.aws/config
+
+# ==============================================================================
+# Terraform
+# ==============================================================================
+
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+!example.tfvars
+!terraform.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# ==============================================================================
+# Node.js / JavaScript / TypeScript
+# ==============================================================================
+
+node_modules/
+jspm_packages/
+bower_components/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Caches
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
+.yarn-integrity
+.pnpm-store/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Build outputs
 dist/
+build/
+out/
+.next/
+.nuxt/
+.vuepress/dist
+.docusaurus/
+.cache/
+.parcel-cache/
+.turbo/
+
+# Testing / coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# TypeScript
+*.tsbuildinfo
+
+# ==============================================================================
+# Python
+# ==============================================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+develop-eggs/
 downloads/
 eggs/
 .eggs/
@@ -20,34 +190,31 @@ parts/
 sdist/
 var/
 wheels/
-node_modules/
+share/python-wheels/
 *.egg-info/
-*.pyc
-.DS_Store
 .installed.cfg
 *.egg
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-*.rafaelgta
 
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit tests / coverage
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
 
@@ -55,65 +222,118 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
+# Django
 *.log
-.static_storage/
-.media/
 local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
-# Flask stuff:
+# Flask
 instance/
 .webassets-cache
 
-# Scrapy stuff:
+# Scrapy
 .scrapy
 
-# Sphinx documentation
+# Sphinx
 docs/_build/
 
 # PyBuilder
+.pybuilder/
 target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
 # pyenv
 .python-version
 
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
+# pipenv / poetry / pdm
+Pipfile.lock
+poetry.lock
+.pdm.toml
 
 # Environments
-.env
 .venv
-env/
 venv/
+env/
 ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
+# mypy / Pyre / pytype / Ruff
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# Spyder / Rope
 .spyderproject
 .spyproject
-
-# Rope project settings
 .ropeproject
 
-# mkdocs documentation
+# mkdocs
 /site
 
-# mypy
-.mypy_cache/
+# ==============================================================================
+# Docker
+# ==============================================================================
+
+.docker/
+docker-compose.override.yml
+docker-compose.override.yaml
+*.pid
+
+# ==============================================================================
+# AWS / Cloud
+# ==============================================================================
+
+.aws-sam/
+.serverless/
+.chalice/deployments/
+.chalice/venv/
+cdk.out/
+cdk.context.json
+
+# ==============================================================================
+# Infraestrutura / build genérico
+# ==============================================================================
 
 *.log
-*.serverless/*
-*.serverless
-*.vscode/*
-*.vscode
-*.pdf
-RespostaEX3.5/*
-Antigo/*
-*Icon*
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.orig
+
+# ==============================================================================
+# Dados / outputs locais (não versionar datasets)
+# ==============================================================================
+
+data/raw/
+data/processed/
+data/interim/
+*.parquet
+*.avro
+*.orc
+*.csv.gz
+*.tsv.gz
+
+# ==============================================================================
+# Específicos deste repositório
+# ==============================================================================
+
+codigosTeste/
+RespostaEX3.5/
+Antigo/
+*.rafaelgta
