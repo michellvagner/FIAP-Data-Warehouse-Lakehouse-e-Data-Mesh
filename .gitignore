@@ -48,6 +48,12 @@ $RECYCLE.BIN/
 *.code-workspace
 .history/
 
+# Claude Code / Claude AI
+.claude/
+CLAUDE.md
+.claude.json
+.claude.local.json
+
 # JetBrains (IntelliJ, PyCharm, WebStorm, etc)
 .idea/
 *.iml
