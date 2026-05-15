@@ -53,11 +53,53 @@ Se ambos funcionarem, prossiga.
 
 ```bash
 cd /workspaces/FIAP-Data-Warehouse-Lakehouse-e-Data-Mesh/03-Data-Modeling-e-Data-Warehouse/01-provisionamento
-terraform init
+bash scripts/init.sh
 terraform apply
 ```
 
 Tempo típico: **5 a 8 minutos** (o Redshift é o que mais demora).
+
+<details>
+<summary><b>💡 Clique para entender: o que <code>scripts/init.sh</code> faz</b></summary>
+<blockquote>
+
+O script substitui o `terraform init` puro e configura o **state remoto no S3** com um único comando. Ele:
+
+1. Valida que `aws sts get-caller-identity` funciona (credenciais ativas)
+2. Localiza o bucket `base-config-<SEU_RM>` criado no Lab 00 (`aws s3 ls | awk '/base-config-/ ...'`)
+3. Roda `terraform init -reconfigure -backend-config="bucket=<bucket-encontrado>"`
+
+O backend S3 está declarado em [`state.tf`](state.tf) com `key = "03-data-warehouse/terraform.tfstate"`. O nome do bucket é injetado em runtime para evitar acoplamento com o RM de cada aluno.
+
+**Por que state remoto neste lab?**
+
+| Vantagem | O que acontece sem state remoto |
+|----------|----------------------------------|
+| Sobrevive a reinício do Codespaces | Se o container é recriado, o `.terraform/` local é perdido — qualquer `apply` subsequente recria tudo do zero, gerando recursos órfãos |
+| Permite trocar de máquina | Aluno que começa em casa e termina na faculdade não consegue dar `destroy` sem o state local |
+| Auditável | O `tfstate` no S3 fica como evidência da sessão para o professor |
+
+A `LabRole` já tem `s3:GetObject` e `s3:PutObject` no bucket `base-config-*` — não há permissão extra a configurar.
+
+</blockquote>
+</details>
+
+<details>
+<summary><b>⚠ Se der erro: <code>nenhum bucket 'base-config-*' encontrado</code></b></summary>
+<blockquote>
+
+Você ainda não rodou o setup do Lab 00. Vá para [`00-create-codespaces/README.md`](../../00-create-codespaces/README.md), crie o bucket `base-config-<SEU_RM>` e volte aqui.
+
+Validação rápida:
+
+```bash
+aws s3 ls | grep base-config
+```
+
+Deve retornar uma linha. Se vier vazio, o bucket não existe na conta atual.
+
+</blockquote>
+</details>
 
 O Terraform vai perguntar se você confirma (`yes`). No final, imprime outputs como:
 
@@ -247,6 +289,9 @@ terraform destroy
 ```
 
 Tempo típico: **3 a 5 minutos**. Remove cluster, subnet group, SG, bucket (com `force_destroy`), Glue database.
+
+> [!NOTE]
+> O `terraform destroy` deixa o arquivo `terraform.tfstate` no bucket `base-config-*` em estado vazio (sem recursos). Isso é correto — o state vira o registro auditável de que o ambiente foi desprovisionado. Não apague o bucket `base-config-*`, ele é usado por outros labs do MBA.
 
 > [!CAUTION]
 > **Não esqueça deste passo.** Um cluster `ra3.large` esquecido consome budget do Learner Lab rapidamente. Aluno deve rodar `terraform destroy` **antes** de fechar o Codespaces ao final da sessão.
