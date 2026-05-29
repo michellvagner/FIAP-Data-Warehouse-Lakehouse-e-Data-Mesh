@@ -898,8 +898,8 @@ Um arquivo `.zip` com **estrutura exata** abaixo, que você sobe no **portal FIA
 ### Estrutura obrigatória do zip
 
 ```
-trabalho-final-<SEU_RM>.zip
-└── trabalho-final-<SEU_RM>/
+trabalho-final.zip
+└── trabalho-final/
     ├── sql/
     │   ├── 01_create_iceberg_tables.sql
     │   ├── 02_insert_data.sql
@@ -917,10 +917,9 @@ trabalho-final-<SEU_RM>.zip
 
 **Detalhes:**
 
-- **`<SEU_RM>`** é o seu RM da FIAP (ex: `RM355678`). Use letras maiúsculas, sem espaços.
-- Cada `.sql` é o **arquivo que você efetivamente rodou no Athena** — não a versão do gabarito, não o seu rascunho. Limpo, comentado, com `<ACCOUNT_ID>` substituído pelo seu valor.
-- Cada `.png` é um screenshot **legível** (sem zoom de microscópio nem janela cortada). Se não couber tudo, prefira 2 screenshots (`04a_...png`, `04b_...png`).
-- `DECISION.md` é o que você escreveu na Tarefa 9.
+- Cada `.sql` é o **arquivo que vocês efetivamente rodaram no Athena** — não a versão do gabarito, não o rascunho. Limpo, comentado, com `<ACCOUNT_ID>` substituído pelo valor real.
+- Cada `.png` é um screenshot **legível** (sem zoom de microscópio nem janela cortada). Se não couber tudo, prefiram 2 screenshots (`04a_...png`, `04b_...png`).
+- `DECISION.md` é o que vocês escreveram na Tarefa 9.
 
 ---
 
@@ -930,21 +929,18 @@ trabalho-final-<SEU_RM>.zip
 
 ```bash
 cd /workspaces/FIAP-Data-Warehouse-Lakehouse-e-Data-Mesh/04-Trabalho-Final && \
-  mkdir -p entrega/trabalho-final-<SEU_RM>/sql && \
-  mkdir -p entrega/trabalho-final-<SEU_RM>/prints && \
+  mkdir -p entrega/trabalho-final/sql && \
+  mkdir -p entrega/trabalho-final/prints && \
   echo "Pasta entrega/ criada. Copie seus arquivos para sql/ e prints/, e mova o DECISION.md para a raiz."
 ```
 
-> [!TIP]
-> Substitua `<SEU_RM>` pelo seu RM real **antes** de rodar (ex: `RM355678`). O comando cria uma pasta com esse nome — se errar, é só rodar de novo com o nome correto e apagar a errada.
-
-Cole seus 6 SQLs em `entrega/trabalho-final-<SEU_RM>/sql/`. Cole seus 4 prints em `entrega/trabalho-final-<SEU_RM>/prints/`. Mova o `DECISION.md` para `entrega/trabalho-final-<SEU_RM>/`.
+Cole os 6 SQLs do grupo em `entrega/trabalho-final/sql/`. Cole os 4 prints em `entrega/trabalho-final/prints/`. Mova o `DECISION.md` para `entrega/trabalho-final/`.
 
 Confira a estrutura final:
 
 ```bash
 cd /workspaces/FIAP-Data-Warehouse-Lakehouse-e-Data-Mesh/04-Trabalho-Final && \
-  find entrega/trabalho-final-<SEU_RM> -type f | sort
+  find entrega/trabalho-final -type f | sort
 ```
 
 Esperado: 11 linhas (6 SQLs + 4 PNGs + 1 DECISION.md).
@@ -978,8 +974,8 @@ Esperado: 11 linhas (6 SQLs + 4 PNGs + 1 DECISION.md).
 
 ```bash
 cd /workspaces/FIAP-Data-Warehouse-Lakehouse-e-Data-Mesh/04-Trabalho-Final/entrega && \
-  zip -r trabalho-final-<SEU_RM>.zip trabalho-final-<SEU_RM>/ && \
-  ls -lh trabalho-final-<SEU_RM>.zip
+  zip -r trabalho-final.zip trabalho-final/ && \
+  ls -lh trabalho-final.zip
 ```
 
 Esperado: arquivo entre 200 KB e 5 MB (depende do tamanho dos prints).
@@ -991,7 +987,7 @@ Faça upload no **portal FIAP**, no espaço do **trabalho que o professor criou 
 
 ### Checkpoint
 
-- [ ] `trabalho-final-<SEU_RM>.zip` validado com `find` (11 arquivos)
+- [ ] `trabalho-final.zip` validado com `find` (11 arquivos)
 - [ ] Upload feito no portal FIAP **antes do prazo da sua turma**
 - [ ] Confirmação visual de que o portal aceitou o arquivo
 
