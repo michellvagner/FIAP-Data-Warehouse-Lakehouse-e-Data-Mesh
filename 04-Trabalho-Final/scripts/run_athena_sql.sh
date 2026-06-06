@@ -95,6 +95,14 @@ for i in "${!STATEMENTS[@]}"; do
       SUCCEEDED)
         ELAPSED=$(($(date +%s) - T0))
         echo "  [$IDX/$NUM] SUCCEEDED em ${ELAPSED}s (QID=$QID)"
+        
+        if echo "$STMT" | grep -iqE '^\s*(SELECT|SHOW|DESCRIBE)'; then
+          echo "--- Resultado [$IDX/$NUM] ---"
+          aws athena get-query-results \
+            --query-execution-id "$QID" \
+            --output table \
+            --query 'ResultSet.Rows[*].Data[*].VarCharValue'
+        fi
         break
         ;;
       FAILED|CANCELLED)
@@ -114,4 +122,16 @@ for i in "${!STATEMENTS[@]}"; do
 done
 
 echo "OK: $SQL_FILE concluido."
+echo "LAST_QID=$LAST_QID"
+
+# Imprime resultado apenas se o ultimo statement for SELECT
+LAST_STMT="${STATEMENTS[$((NUM-1))]}"
+if [[ -n "$LAST_QID" ]] && echo "$LAST_STMT" | grep -iqE '^\s*(SELECT|SHOW|DESCRIBE)'; then
+  echo "--- Resultado ---"
+  aws athena get-query-results \
+    --query-execution-id "$LAST_QID" \
+    --output table \
+    --query 'ResultSet.Rows[*].Data[*].VarCharValue'
+fi
+
 echo "LAST_QID=$LAST_QID"
